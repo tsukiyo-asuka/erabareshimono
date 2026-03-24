@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【選ばれし者】魂を目覚めさせるアロマスプレー｜AURIN × 月夜明日香</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --gold-pale: #f5e9c0;
+    --deep: #0a0608;
+    --dark: #12080e;
+    --mid: #1e1018;
+    --text: #e8ddd0;
+    --text-dim: #9e8f88;
+    --accent: #8b3a6e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    overflow-x: hidden;
+    line-height: 1.9;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* STARS */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .star {
+    position: absolute; border-radius: 50%; background: var(--gold-pale);
+    animation: twinkle var(--dur, 3s) ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(1); }
+    to   { opacity: 0.7; transform: scale(1.4); }
+  }
+
+  /* ORBS */
+  .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; animation: drift var(--od,20s) ease-in-out infinite alternate; }
+  .orb-1 { width:400px;height:400px;background:radial-gradient(circle,rgba(139,58,110,0.3),transparent);top:-100px;right:-100px; }
+  .orb-2 { width:300px;height:300px;background:radial-gradient(circle,rgba(74,32,96,0.4),transparent);bottom:20%;left:-80px;--od:25s; }
+  .orb-3 { width:250px;height:250px;background:radial-gradient(circle,rgba(201,168,76,0.15),transparent);top:40%;right:10%;--od:18s; }
+  @keyframes drift {
+    from { transform:translate(0,0) scale(1); }
+    to   { transform:translate(30px,40px) scale(1.1); }
+  }
+
+  .wrap { position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 24px; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.8s,transform 0.8s; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ── STICKY BAR ── */
+  .sticky {
+    position:fixed;bottom:0;left:0;right:0;z-index:100;
+    background:rgba(10,6,8,0.97);
+    border-top:1px solid rgba(201,168,76,0.25);
+    padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    transform:translateY(100%);transition:transform 0.4s;
+  }
+  .sticky.show { transform:translateY(0); }
+  .sticky-left { font-size:11px;color:var(--text-dim);letter-spacing:0.2em;line-height:1.6; }
+  .sticky-price { font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold-light); }
+  .sticky-btn {
+    flex-shrink:0;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold),#806020);
+    color:var(--deep);font-family:'Noto Serif JP',serif;font-size:13px;
+    font-weight:400;letter-spacing:0.2em;padding:12px 24px;
+    text-decoration:none;white-space:nowrap;transition:opacity 0.3s;
+  }
+  .sticky-btn:hover { opacity:0.85; }
+
+  /* ════════════════════════
+     HERO
+  ════════════════════════ */
+  .hero {
+    min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;
+    padding:80px 24px 80px;position:relative;z-index:1;
+  }
+  .hero-eyebrow {
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.5em;
+    color:var(--gold);border:1px solid rgba(201,168,76,0.3);
+    padding:6px 20px;margin-bottom:36px;
+    opacity:0;animation:fadeUp 1s 0.3s forwards;
+  }
+  /* ── 掴みコピー：動画の続きとして読める ── */
+  .hero-catch {
+    font-size:clamp(13px,2.5vw,15px);color:var(--text-dim);
+    letter-spacing:0.15em;line-height:2.2;margin-bottom:28px;
+    opacity:0;animation:fadeUp 1s 0.5s forwards;
+  }
+  .hero-title {
+    font-weight:300;font-size:clamp(28px,7vw,50px);
+    line-height:1.4;letter-spacing:0.08em;margin-bottom:12px;
+    opacity:0;animation:fadeUp 1s 0.7s forwards;
+  }
+  .hero-title em { font-style:normal;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-pale));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+  .hero-en {
+    font-family:'Cormorant Garamond',serif;font-size:12px;
+    letter-spacing:0.4em;color:var(--text-dim);margin-bottom:44px;
+    opacity:0;animation:fadeUp 1s 0.9s forwards;
+  }
+
+  /* bottle */
+  .hero-bottle-wrap {
+    position:relative;width:200px;height:280px;margin:0 auto 44px;
+    opacity:0;animation:fadeUp 1.2s 1.1s forwards;
+  }
+  .hero-bottle-wrap::before {
+    content:'';position:absolute;inset:-30px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,0.22) 0%,transparent 70%);
+    animation:pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100%{transform:scale(1);opacity:0.6;}
+    50%{transform:scale(1.1);opacity:1;}
+  }
+  .hero-bottle {
+    width:100%;height:100%;object-fit:contain;
+    filter:drop-shadow(0 20px 60px rgba(201,168,76,0.3)) drop-shadow(0 0 40px rgba(139,58,110,0.4));
+  }
+
+  /* price */
+  .hero-price-wrap { margin-bottom:36px;opacity:0;animation:fadeUp 1s 1.3s forwards; }
+  .hero-price { font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold-light); }
+  .hero-price span { font-size:13px;color:var(--text-dim);margin-left:6px; }
+
+  /* main CTA */
+  .cta-main {
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold),#806020);
+    color:var(--deep);font-family:'Noto Serif JP',serif;font-size:15px;
+    font-weight:400;letter-spacing:0.3em;padding:20px 60px;
+    text-decoration:none;transition:all 0.4s;
+    box-shadow:0 8px 40px rgba(201,168,76,0.35);
+    opacity:0;animation:fadeUp 1s 1.5s forwards;
+  }
+  .cta-main:hover { transform:translateY(-3px);box-shadow:0 16px 60px rgba(201,168,76,0.5);letter-spacing:0.4em; }
+  .cta-sub { font-size:11px;color:var(--text-dim);letter-spacing:0.2em;margin-top:14px;opacity:0;animation:fadeUp 1s 1.7s forwards; }
+
+  /* scroll indicator */
+  .hero-scroll {
+    position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--text-dim);font-size:9px;letter-spacing:0.35em;
+    opacity:0;animation:fadeUp 1s 2s forwards;
+  }
+  .hero-scroll-line { width:1px;height:46px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite; }
+  @keyframes scrollLine {
+    0%{transform:scaleY(0);transform-origin:top;}
+    50%{transform:scaleY(1);transform-origin:top;}
+    51%{transform:scaleY(1);transform-origin:bottom;}
+    100%{transform:scaleY(0);transform-origin:bottom;}
+  }
+
+  /* ════════════════════════
+     MIRROR SECTION（共感）
+     動画で温まった人の感情を
+     "そうそう"で受け取る
+  ════════════════════════ */
+  .mirror { padding:80px 0;text-align:center; }
+  .mirror-copy {
+    font-size:clamp(17px,4vw,24px);font-weight:300;
+    line-height:2.6;letter-spacing:0.08em;
+  }
+  .mirror-copy em { font-style:normal;color:var(--gold-light); }
+  .mirror-divider {
+    width:1px;height:60px;
+    background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+    margin:48px auto;
+  }
+  .mirror-sub { font-size:15px;color:var(--text-dim);line-height:2.4; }
+  .mirror-sub em { font-style:normal;color:var(--text);font-size:17px; }
+
+  /* ════════════════════════
+     URGENCY BAND
+  ════════════════════════ */
+  .urgency-band {
+    background:linear-gradient(135deg,rgba(139,58,110,0.12),rgba(201,168,76,0.06));
+    border-top:1px solid rgba(201,168,76,0.2);
+    border-bottom:1px solid rgba(201,168,76,0.2);
+    padding:48px 24px;text-align:center;
+  }
+  .urgency-band-label {
+    font-family:'Cinzel',serif;font-size:10px;
+    letter-spacing:0.5em;color:var(--gold);margin-bottom:20px;display:block;
+  }
+  .urgency-band-text { font-size:15px;color:var(--text-dim);line-height:2.4; }
+  .urgency-band-text em { font-style:normal;color:var(--text); }
+  .urgency-band-text strong { color:var(--gold-light);font-weight:400; }
+
+  /* ════════════════════════
+     WHAT（商品説明）
+     短く・深く
+  ════════════════════════ */
+  .what { padding:80px 0; }
+  .section-label {
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.5em;
+    color:var(--gold);display:block;margin-bottom:16px;text-align:center;
+  }
+  .section-title {
+    font-weight:300;font-size:clamp(22px,5vw,34px);
+    line-height:1.6;letter-spacing:0.08em;text-align:center;margin-bottom:48px;
+  }
+  .section-title em { font-style:normal;color:var(--gold-light); }
+  .what-box {
+    border:1px solid rgba(201,168,76,0.15);
+    background:rgba(255,255,255,0.02);
+    padding:44px 40px;position:relative;
+    font-size:15px;color:var(--text-dim);line-height:2.4;
+  }
+  .what-box::before {
+    content:'"';position:absolute;top:-18px;left:28px;
+    font-family:'Cormorant Garamond',serif;font-size:80px;
+    color:var(--gold);opacity:0.25;line-height:1;
+  }
+  .what-box strong { color:var(--text);font-weight:400; }
+
+  /* ════════════════════════
+     SCENT GRID
+  ════════════════════════ */
+  .scent { padding:80px 0; }
+  .scent-grid { display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;background:rgba(201,168,76,0.08); }
+  .scent-item {
+    background:var(--dark);padding:28px 24px;
+    transition:background 0.3s;position:relative;overflow:hidden;
+  }
+  .scent-item:hover { background:var(--mid); }
+  .scent-item::after { content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width 0.5s; }
+  .scent-item:hover::after { width:100%; }
+  .scent-en { font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold-light);letter-spacing:0.1em;margin-bottom:6px; }
+  .scent-jp { font-size:11px;letter-spacing:0.25em;color:var(--gold);display:block;margin-bottom:12px; }
+  .scent-desc { font-size:12px;color:var(--text-dim);line-height:1.9; }
+  .scent-full { grid-column:1/-1; }
+
+  /* ════════════════════════
+     HOW TO USE
+  ════════════════════════ */
+  .howto { padding:80px 0;text-align:center; }
+  .howto-cards { display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:48px; }
+  .howto-card {
+    border:1px solid rgba(201,168,76,0.12);padding:32px 16px;
+    transition:border-color 0.3s,transform 0.3s;
+  }
+  .howto-card:hover { border-color:rgba(201,168,76,0.4);transform:translateY(-4px); }
+  .howto-icon { font-size:26px;display:block;margin-bottom:14px; }
+  .howto-time { font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.4em;color:var(--gold);display:block;margin-bottom:10px; }
+  .howto-text { font-size:13px;color:var(--text-dim);line-height:1.9; }
+
+  /* ════════════════════════
+     VOICE（口コミ）
+  ════════════════════════ */
+  .voice { padding:80px 0; }
+  .voice-item { border-top:1px solid rgba(201,168,76,0.1);padding:36px 0; }
+  .voice-text {
+    font-size:16px;font-style:italic;font-weight:300;line-height:2.2;
+    color:var(--text);padding-left:24px;
+    border-left:2px solid rgba(201,168,76,0.3);
+  }
+  .voice-stars { display:flex;gap:4px;margin-top:12px;padding-left:24px; }
+  .star-g { color:var(--gold);font-size:12px; }
+
+  /* ════════════════════════
+     FINAL CTA
+     ここに全エネルギーを注ぐ
+  ════════════════════════ */
+  .final { padding:100px 0;text-align:center; }
+  .final-inner {
+    border:1px solid rgba(201,168,76,0.25);
+    background:linear-gradient(135deg,rgba(139,58,110,0.08),rgba(74,32,96,0.12),rgba(201,168,76,0.04));
+    padding:72px 40px;position:relative;overflow:hidden;
+  }
+  .final-inner::before {
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.08),transparent 70%);
+  }
+  .final-inner::after {
+    content:'✦';position:absolute;top:16px;left:16px;
+    color:var(--gold);font-size:12px;
+  }
+  .final-corner { position:absolute;bottom:16px;right:16px;color:var(--gold);font-size:12px; }
+
+  .final-label {
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.5em;
+    color:var(--gold);margin-bottom:28px;display:block;position:relative;z-index:1;
+  }
+  /* 動画CTAの余韻を受け取るコピー */
+  .final-copy {
+    font-size:clamp(18px,4vw,26px);font-weight:300;line-height:2.2;
+    letter-spacing:0.08em;margin-bottom:16px;position:relative;z-index:1;
+  }
+  .final-copy em { font-style:normal;color:var(--gold-light); }
+  .final-sub {
+    font-size:14px;color:var(--text-dim);line-height:2.4;
+    margin-bottom:48px;position:relative;z-index:1;
+  }
+  .final-price-block { margin-bottom:40px;position:relative;z-index:1; }
+  .final-price { font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;color:var(--gold-light); }
+  .final-price-note { font-size:12px;color:var(--text-dim);letter-spacing:0.2em;margin-top:4px; }
+
+  .cta-large {
+    display:inline-block;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold),#806020);
+    color:var(--deep);font-family:'Noto Serif JP',serif;font-weight:400;
+    font-size:16px;letter-spacing:0.3em;padding:22px 68px;
+    text-decoration:none;position:relative;z-index:1;
+    transition:all 0.4s;box-shadow:0 8px 40px rgba(201,168,76,0.4);
+  }
+  .cta-large:hover { transform:translateY(-3px);box-shadow:0 20px 70px rgba(201,168,76,0.6);letter-spacing:0.4em; }
+  .cta-note { font-size:12px;color:var(--text-dim);margin-top:18px;letter-spacing:0.15em;position:relative;z-index:1; }
+  .cta-note2 { font-size:11px;color:rgba(255,255,255,0.2);margin-top:8px;letter-spacing:0.1em;position:relative;z-index:1; }
+
+  /* SPEC */
+  .spec { padding:60px 0; }
+  .spec-table { width:100%;border-collapse:collapse;font-size:13px; }
+  .spec-table tr { border-bottom:1px solid rgba(255,255,255,0.04); }
+  .spec-table td:first-child { font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--gold);padding:14px 0;width:150px;vertical-align:top; }
+  .spec-table td:last-child { color:var(--text-dim);padding:14px 0;line-height:1.9; }
+
+  /* FOOTER */
+  .footer { padding:40px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.04); }
+  .footer-brand { font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.4em;color:var(--gold);margin-bottom:10px; }
+  .footer-note { font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;line-height:2; }
+
+  /* DIVIDER */
+  .divider { display:flex;align-items:center;gap:16px;margin:56px auto;max-width:280px; }
+  .divider::before,.divider::after { content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .divider span { color:var(--gold);font-size:12px;letter-spacing:4px; }
+
+  @media(max-width:600px){
+    .howto-cards { grid-template-columns:1fr; }
+    .scent-grid { grid-template-columns:1fr; }
+    .cta-large { padding:20px 40px;font-size:14px; }
+    .what-box { padding:36px 24px; }
+    .final-inner { padding:52px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- STICKY -->
+<div class="sticky" id="sticky">
+  <div class="sticky-left">
+    <div>選ばれし者 アロマスプレー</div>
+    <div class="sticky-price">¥4,700 <span style="font-size:11px;color:var(--text-dim);">税込・送料無料</span></div>
+  </div>
+  <a href="https://aurin.base.shop/items/106846103" target="_blank" class="sticky-btn">今すぐ受け取る</a>
+</div>
+
+<!-- ═══════════════════════
+     HERO
+═══════════════════════ -->
+<section class="hero">
+  <div class="hero-eyebrow">AURIN × TSUKIYO ASUKA</div>
+
+  <!-- 動画CTAの余韻を直接受け取るコピー -->
+  <p class="hero-catch">
+    「今だ」と感じてここに来たあなたへ。<br>
+    その直感は、正しいです。
+  </p>
+
+  <h1 class="hero-title">
+    <em>選ばれし者</em><br>
+    魂を目覚めさせる<br>アロマスプレー
+  </h1>
+  <p class="hero-en">CHOSEN ONE — AWAKENING MIST</p>
+
+  <div class="hero-bottle-wrap">
+    <img
+      src="https://baseec-img-mng.akamaized.net/images/item/origin/0a7861d7acfdba8953bace26981dc3f1.png?imformat=generic&q=90&im=Resize,width=600,type=normal"
+      alt="選ばれし者アロマスプレー"
+      class="hero-bottle"
+    >
+  </div>
+
+  <div class="hero-price-wrap">
+    <div class="hero-price">¥4,700 <span>税込・送料無料</span></div>
+  </div>
+
+  <a href="https://aurin.base.shop/items/106846103" target="_blank" class="cta-main" id="heroCta">
+    今すぐ受け取る
+  </a>
+  <p class="cta-sub">在庫がなくなり次第、次回調香は未定です</p>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     MIRROR（共感）
+═══════════════════════ -->
+<section class="mirror">
+  <div class="wrap reveal">
+    <p class="mirror-copy">
+      動画を最後まで見たあなたは<br>
+      すでに<em>99％とは違う側</em>にいます。
+    </p>
+    <div class="mirror-divider"></div>
+    <p class="mirror-sub">
+      「頑張っているのに増えない」<br>
+      「やる気はあるのに続かない」<br>
+      「本当の自分を生きている感覚がない」<br><br>
+      それは能力の問題ではありません。<br>
+      <em>まだ目覚めていない力が、あなたの中にあるからです。</em>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     URGENCY BAND
+═══════════════════════ -->
+<div class="urgency-band reveal">
+  <div class="wrap">
+    <span class="urgency-band-label">LIMITED PRODUCTION</span>
+    <p class="urgency-band-text">
+      この香りは<em>少量生産・不定期調香</em>でご案内しています。<br>
+      在庫がなくなり次第、次回調香は未定。<br>
+      <strong>惹かれた今この瞬間が、まさに"開かれた扉"です。</strong>
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     WHAT IS
+═══════════════════════ -->
+<section class="what">
+  <div class="wrap reveal">
+    <span class="section-label">WHAT IS THIS</span>
+    <h2 class="section-title">これは、<em>癒し</em>を超えた<br>魂の<em>起動スイッチ</em></h2>
+    <div class="what-box">
+      この香りは、ただ心地よいだけのものではありません。<br><br>
+      月夜明日香の占星術タロット占いと深い精神世界の探求から生まれた、
+      あなたの<strong>「内なる本質」を静かに起動するための香り</strong>です。<br><br>
+      脳科学的にも、香りは唯一「感情」「記憶」「行動」に直結する脳の部位へ直接届きます。
+      成功体験とリンクさせることで、あなたを<strong>「動ける自分」へと変えていくのです。</strong><br><br>
+      小さな達成とセットでこの香りを使うたびに、
+      あなたの脳は「この香りがあれば動ける」と記憶していきます。
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     SCENT NOTES
+═══════════════════════ -->
+<section class="scent">
+  <div class="wrap reveal">
+    <span class="section-label">SCENT NOTES</span>
+    <h2 class="section-title">7つの精油が奏でる<br><em>魂の覚醒ブレンド</em></h2>
+    <div class="scent-grid">
+      <div class="scent-item">
+        <div class="scent-en">Rosemary</div>
+        <span class="scent-jp">ローズマリー</span>
+        <p class="scent-desc">眠っていた感覚を目覚めさせ、意志を強くする覚醒の香り。</p>
+      </div>
+      <div class="scent-item">
+        <div class="scent-en">Eucalyptus Lemon</div>
+        <span class="scent-jp">ユーカリレモン</span>
+        <p class="scent-desc">溜まった重たい空気を一掃し、軽やかな一歩を導く。</p>
+      </div>
+      <div class="scent-item">
+        <div class="scent-en">Tea Tree</div>
+        <span class="scent-jp">ティートリー</span>
+        <p class="scent-desc">自己防衛の力を高め、清らかな自分を取り戻す。</p>
+      </div>
+      <div class="scent-item">
+        <div class="scent-en">Bergamot</div>
+        <span class="scent-jp">ベルガモット</span>
+        <p class="scent-desc">心の奥に希望と再生のエネルギーを吹き込む光の香り。</p>
+      </div>
+      <div class="scent-item">
+        <div class="scent-en">Frankincense</div>
+        <span class="scent-jp">フランキンセンス</span>
+        <p class="scent-desc">古代から聖なる儀式に使われた神秘の樹脂。過去を手放し魂を浄化する。</p>
+      </div>
+      <div class="scent-item">
+        <div class="scent-en">White Sage</div>
+        <span class="scent-jp">ホワイトセージ</span>
+        <p class="scent-desc">邪念・悪縁を断ち切り、神聖な空間を生み出す強力な浄化。</p>
+      </div>
+      <div class="scent-item scent-full">
+        <div class="scent-en">Patchouli</div>
+        <span class="scent-jp">パチュリ</span>
+        <p class="scent-desc">揺らぎがちな心を落ち着かせ、根源の力を呼び起こす大地の香り。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     HOW TO USE
+═══════════════════════ -->
+<section class="howto">
+  <div class="wrap reveal">
+    <span class="section-label">HOW TO USE</span>
+    <h2 class="section-title">1日3つの<em>使い方</em></h2>
+    <div class="howto-cards">
+      <div class="howto-card">
+        <span class="howto-icon">🌅</span>
+        <span class="howto-time">MORNING</span>
+        <p class="howto-text">朝のスタート前に「今日のわたし」を整える</p>
+      </div>
+      <div class="howto-card">
+        <span class="howto-icon">⚡</span>
+        <span class="howto-time">BEFORE ACTION</span>
+        <p class="howto-text">仕事・発信・決断の前にぶれない自分軸で向き合う</p>
+      </div>
+      <div class="howto-card">
+        <span class="howto-icon">🌙</span>
+        <span class="howto-time">NIGHT</span>
+        <p class="howto-text">夜のひとときに「戻ってこれる場所」として香りをまとう</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     VOICE
+═══════════════════════ -->
+<section class="voice">
+  <div class="wrap reveal">
+    <span class="section-label" style="text-align:center;display:block;">VOICE</span>
+    <h2 class="section-title">ご愛用者の声</h2>
+    <div class="voice-item">
+      <p class="voice-text">「言葉にならない安心感が、深呼吸の中から出てきた」</p>
+      <div class="voice-stars"><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span></div>
+    </div>
+    <div class="voice-item">
+      <p class="voice-text">「香りをまとうと"自分に戻れる感じ"がある」</p>
+      <div class="voice-stars"><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span></div>
+    </div>
+    <div class="voice-item">
+      <p class="voice-text">「繊細なわたしにちょうどいい。そっと支えてくれる」</p>
+      <div class="voice-stars"><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span></div>
+    </div>
+    <div class="voice-item">
+      <p class="voice-text">「この香りと過ごした一ヶ月で、人生が動き出した」</p>
+      <div class="voice-stars"><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span><span class="star-g">★</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     SPEC
+═══════════════════════ -->
+<section class="spec">
+  <div class="wrap reveal">
+    <span class="section-label">PRODUCT DETAIL</span>
+    <table class="spec-table">
+      <tr><td>PRODUCT</td><td>【選ばれし者】魂を目覚めさせるアロマスプレー</td></tr>
+      <tr><td>VOLUME</td><td>60ml</td></tr>
+      <tr><td>BOTTLE</td><td>遮光性ビン</td></tr>
+      <tr><td>INGREDIENTS</td><td>精製水、植物性エタノール（サトウキビ由来）、ローズマリー・ユーカリレモン・ティートリー・ベルガモット・フランキンセンス・ホワイトセージ・パチュリ 各精油</td></tr>
+      <tr><td>PRODUCTION</td><td>一本一本ハンドメイド・小ロット生産</td></tr>
+      <tr><td>SHIPPING</td><td>全国送料無料 / ご注文より7営業日以内発送</td></tr>
+      <tr><td>PRICE</td><td>¥4,700（税込）</td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--text-dim);line-height:2;margin-top:20px;">
+      ※空間用アロマスプレーです。肌への直接使用はお避けください。<br>
+      ※開封後2〜3ヶ月程度でのご使用をおすすめします。<br>
+      ※天然成分を含むため濁り・沈殿物が生じる場合がありますが品質に問題ありません。
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     FINAL CTA
+     ここが最重要
+═══════════════════════ -->
+<section class="final">
+  <div class="wrap reveal">
+    <div class="final-inner">
+      <span class="final-corner">✦</span>
+
+      <span class="final-label">YOUR MOMENT IS NOW</span>
+
+      <!-- 動画CTAと完全に対応したコピー -->
+      <p class="final-copy">
+        ここで動かない人は<br>
+        また同じ場所に戻ります。<br><br>
+        <em>「今だ」と思ったあなたへ。</em><br>
+        これが、<em>流れを固定するもの</em>です。
+      </p>
+
+      <p class="final-sub">
+        惹かれた今この瞬間が、まさに"開かれた扉"。<br>
+        あなたがこの香りに惹かれたのは、偶然ではありません。<br>
+        これは、あなたの内側が「本来の自分」を思い出すための、最初の<strong style="color:var(--gold-light);font-weight:400;">"YES"</strong>。
+      </p>
+
+      <div class="final-price-block">
+        <div class="final-price">¥4,700</div>
+        <div class="final-price-note">税込・全国送料無料・一本一本ハンドメイド</div>
+      </div>
+
+      <a href="https://aurin.base.shop/items/106846103" target="_blank" class="cta-large">
+        今すぐ受け取る →
+      </a>
+      <p class="cta-note">在庫がなくなり次第、次回調香は未定です</p>
+      <p class="cta-note2">迷っているなら、まだ早いです。「今だ」と思った人だけ来てください。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">AURIN</div>
+    <p class="footer-note">
+      月夜明日香の占星術タロット占いプロデュース<br>
+      浄化 / 睡眠 / 十二星座別 / アロマスプレー販売
+    </p>
+  </div>
+</footer>
+
+<script>
+// Stars
+const sc = document.getElementById('stars');
+for(let i=0;i<80;i++){
+  const s=document.createElement('div');s.className='star';
+  const sz=Math.random()*2+0.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${Math.random()*4+2}s;animation-delay:${Math.random()*5}s;`;
+  sc.appendChild(s);
+}
+
+// Reveal
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// Sticky
+const sticky=document.getElementById('sticky');
+const heroCta=document.getElementById('heroCta');
+new IntersectionObserver(es=>{
+  es.forEach(e=>{sticky.classList.toggle('show',!e.isIntersecting);});
+},{threshold:0}).observe(heroCta);
+</script>
+</body>
+</html>
